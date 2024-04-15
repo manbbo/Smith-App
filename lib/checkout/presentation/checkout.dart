@@ -79,10 +79,14 @@ class __CheckoutPageState extends State<CheckoutPage> {
                         );
 
                 case CheckoutLoadingState:
-                  return Container();
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
 
                 default:
-                  return Container();
+                  return const Center(
+                    child: Text('ALGO DEU ERRADO\nTENTE NOVAMENTE'),
+                  );
               }
             },
           ),
