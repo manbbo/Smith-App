@@ -1,6 +1,6 @@
-# smith
+# Smith
 
-A new Flutter project.
+O Smith é um app para fazer suas compras de forma mais rápida e fácil no mercado! Com ele, basta escanear o rótulo do produto e você mesmo pode fazer o checkout.
 
 ## Getting Started
 
