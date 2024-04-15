@@ -65,7 +65,7 @@ class __CheckoutPageState extends State<CheckoutPage> {
                             ),
                             Container(
                               child: Text(
-                                'OIaaaaa',
+                                'Teste',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
