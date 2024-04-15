@@ -22,18 +22,16 @@ class _HomePageState extends State<HomePage> {
           children: [
             ElevatedButton(
               onPressed: () async {
-                // var res = await Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) =>
-                //           const SimpleBarcodeScannerPage(),
-                //     ));
+                var res = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SimpleBarcodeScannerPage(),
+                    ));
                 setState(() {
-                  // if (res is String) {
-                  // productId = res;
-                  checkoutIds.add('1');
-                  addedProduct = true;
-                  // }
+                  if (res is String) {
+                    checkoutIds.add(res);
+                    addedProduct = true;
+                  }
                 });
               },
               child: const Icon(Icons.add_shopping_cart),
