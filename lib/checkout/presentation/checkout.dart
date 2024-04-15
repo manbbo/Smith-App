@@ -31,6 +31,9 @@ class __CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('CHECKOUT'),
+      ),
       body: Center(
         child: BlocProvider(
           create: (_) => cubit,
@@ -42,7 +45,7 @@ class __CheckoutPageState extends State<CheckoutPage> {
 
                   return (pokemon.length <= 0)
                       ? Center(
-                          child: Text('Lista Vazia'),
+                          child: Text('LISTA VAZIA'),
                         )
                       : Column(
                           children: <Widget>[
@@ -65,7 +68,7 @@ class __CheckoutPageState extends State<CheckoutPage> {
                             ),
                             Container(
                               child: Text(
-                                'Teste',
+                                'TESTE',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),

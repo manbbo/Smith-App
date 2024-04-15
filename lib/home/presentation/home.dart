@@ -34,7 +34,15 @@ class _HomePageState extends State<HomePage> {
                   }
                 });
               },
-              child: const Icon(Icons.add_shopping_cart),
+              child: const Column(
+                children: [
+                  Text('ESCANEIE UM PRODUTO'),
+                  Icon(Icons.add_shopping_cart)
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
             ),
             ElevatedButton(
                 onPressed: addedProduct
@@ -53,9 +61,14 @@ class _HomePageState extends State<HomePage> {
                           )
                         }
                     : null,
-                child: Icon(addedProduct
+                child: Column(
+                  children: [
+                    const Text('CARRINHO'),
+                    Icon(addedProduct
                     ? Icons.shopping_basket
-                    : Icons.shopping_basket_outlined))
+                        : Icons.shopping_basket_outlined)
+                  ],
+                ))
           ],
         ),
       ),
