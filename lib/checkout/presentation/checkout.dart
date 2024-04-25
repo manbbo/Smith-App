@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:smith/checkout/presentation/cubit/checkoutcubit.dart';
 import 'package:smith/checkout/presentation/widget/pokemon_widget.dart';
 import 'package:smith/core/data/model/pokemon.dart';
@@ -13,7 +12,7 @@ class CheckoutPage extends StatefulWidget {
     required this.onPressed,
   });
 
-  final List<String> checkoutIds;
+  final Map<String, int> checkoutIds;
   final void Function(String) onPressed;
 
   @override
@@ -24,7 +23,7 @@ class __CheckoutPageState extends State<CheckoutPage> {
   CheckoutCubit cubit = GetIt.I.get<CheckoutCubit>();
   @override
   void initState() {
-    cubit.getPokemon(widget.checkoutIds);
+    cubit.getPokemon(widget.checkoutIds.keys.toList());
     super.initState();
   }
 
@@ -32,10 +31,14 @@ class __CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CHECKOUT'),
+        title: const Text('CHECKOUT'),
       ),
       body: Center(
-        child: BlocProvider(
+        child: (widget.checkoutIds.length <= 0)
+            ? const Center(
+                child: Text('LISTA VAZIA'),
+              )
+            : BlocProvider(
           create: (_) => cubit,
           child: BlocBuilder<CheckoutCubit, CheckoutState>(
             builder: (context, state) {
@@ -43,11 +46,7 @@ class __CheckoutPageState extends State<CheckoutPage> {
                 case CheckoutResultState:
                   List<Pokemon> pokemon = (state as CheckoutResultState).result;
 
-                  return (pokemon.length <= 0)
-                      ? Center(
-                          child: Text('LISTA VAZIA'),
-                        )
-                      : Column(
+                        return Column(
                           children: <Widget>[
                             Expanded(
                               child: ListView.builder(
@@ -57,7 +56,8 @@ class __CheckoutPageState extends State<CheckoutPage> {
                                     onPressed: (id) {
                                       setState(() {
                                         pokemon.removeAt(index);
-                                        widget.checkoutIds.removeAt(index);
+                                        widget.checkoutIds
+                                            .remove(pokemon[index].id);
                                       });
                                       widget.onPressed(pokemon[index].id);
                                     },
@@ -67,7 +67,7 @@ class __CheckoutPageState extends State<CheckoutPage> {
                               ),
                             ),
                             Container(
-                              child: Text(
+                              child: const Text(
                                 'TESTE',
                                 style: TextStyle(color: Colors.black),
                               ),
