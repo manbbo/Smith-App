@@ -44,6 +44,8 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) => const SimpleBarcodeScannerPage(),
                     ));
+
+                if (res is String) {
                 showDialog<int>(
                     context: context,
                     builder: (BuildContext context) {
@@ -86,13 +88,12 @@ class _HomePageState extends State<HomePage> {
                                               _controller.text =
                                                   itemQuantity.toString();
 
-                                              if (res is String) {
+                                              
                                                 checkoutIds.putIfAbsent(
                                                     res, () => itemQuantity);
                                                 addedProduct =
                                                     checkoutIds.isNotEmpty &&
                                                         itemQuantity != 0;
-                                              }
                                             }
                                           }),
                                       child: const Icon(Icons.add)),
@@ -112,6 +113,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       );
                     });
+                }
               },
               child: const Column(
                 children: [
