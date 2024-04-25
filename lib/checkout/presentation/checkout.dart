@@ -56,10 +56,8 @@ class __CheckoutPageState extends State<CheckoutPage> {
                                     onPressed: (id) {
                                       setState(() {
                                         pokemon.removeAt(index);
-                                        widget.checkoutIds
-                                            .remove(pokemon[index].id);
                                       });
-                                      widget.onPressed(pokemon[index].id);
+                                      widget.onPressed(id);
                                     },
                                     pokemon: pokemon[index],
                                   );

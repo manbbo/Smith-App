@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) => const SimpleBarcodeScannerPage(),
                     ));
-                var quantity = showDialog<int>(
+                showDialog<int>(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
@@ -85,6 +85,14 @@ class _HomePageState extends State<HomePage> {
                                               itemQuantity = itemQuantity + 1;
                                               _controller.text =
                                                   itemQuantity.toString();
+
+                                              if (res is String) {
+                                                checkoutIds.putIfAbsent(
+                                                    res, () => itemQuantity);
+                                                addedProduct =
+                                                    checkoutIds.isNotEmpty &&
+                                                        itemQuantity != 0;
+                                              }
                                             }
                                           }),
                                       child: const Icon(Icons.add)),
@@ -104,12 +112,6 @@ class _HomePageState extends State<HomePage> {
                         ],
                       );
                     });
-                setState(() {
-                  if (res is String) {
-                    checkoutIds.putIfAbsent(res, () => itemQuantity);
-                    addedProduct = true;
-                  }
-                });
               },
               child: const Column(
                 children: [
@@ -132,6 +134,7 @@ class _HomePageState extends State<HomePage> {
                                       onPressed: (id) {
                                         setState(() {
                                           checkoutIds.remove(id);
+                                          addedProduct = false;
                                         });
                                       },
                                     )),
